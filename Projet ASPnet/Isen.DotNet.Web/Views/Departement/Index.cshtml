@@ -1,0 +1,40 @@
+@using Isen.DotNet.Library.Models.Implementation;
+@{
+    ViewData["Title"] = "Departement";
+}
+@model IEnumerable<Departement>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Villes <small>/departement/index</small></h1>
+    </div>
+</div>
+<div class="row">
+    <a class="btn btn-default" 
+        asp-controller="Departement" asp-action="Detail">Ajouter un departement...</a>
+</div>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var departement in Model)
+            {
+            <tr>
+                <td>@departement.Id</td>
+                <td>@departement.Name</td>
+                <td>
+                    <a class="btn btn-default" asp-controller="Departement" asp-action="Detail" asp-route-id="@departement.Id">Editer</a>
+                    &nbsp;
+                    <a class="btn btn-danger" asp-controller="Departement" asp-action="Delete" asp-route-id="@departement.Id">Supprimer</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
