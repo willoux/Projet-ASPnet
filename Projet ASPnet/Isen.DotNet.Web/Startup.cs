@@ -49,7 +49,7 @@ namespace Isen.DotNet.Web
             services.AddScoped<ICityRepository, DbContextCityRepository>();
             services.AddScoped<IPersonRepository, DbContextPersonRepository>();
             services.AddScoped<IDepartementRepository, DbContextDepartementRepository>();
-
+            services.AddScoped<ICommuneRepository, DbContextCommuneRepository>();
             // injection d'autres services
             services.AddScoped<SeedData>();
 

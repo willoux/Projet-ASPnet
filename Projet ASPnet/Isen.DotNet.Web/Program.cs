@@ -29,6 +29,7 @@ namespace Isen.DotNet.Web
                 seed.AddCities();
                 seed.AddPersons();
                 seed.AddDepart();
+                seed.AddCommunes();
             }
             
             host.Run();

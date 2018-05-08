@@ -14,19 +14,22 @@ namespace Isen.DotNet.Library.Data
         private readonly ICityRepository _cityRepository;
         private readonly IPersonRepository _personRepository;
         private readonly IDepartementRepository _departRepository;
+        private readonly ICommuneRepository _communeRepository;
 
         public SeedData(
             ApplicationDbContext context,
             ILogger<SeedData> logger,
             ICityRepository cityRepository,
             IPersonRepository personRepository,
-            IDepartementRepository departementRepository)
+            IDepartementRepository departementRepository,
+            ICommuneRepository communeRepository)
         {
             _context = context;
             _logger = logger;
             _cityRepository = cityRepository;
             _personRepository = personRepository;
             _departRepository = departementRepository;
+            _communeRepository = communeRepository;
         }
 
         public void DropDatabase()
@@ -62,25 +65,6 @@ namespace Isen.DotNet.Library.Data
             _logger.LogWarning("Added cities");
         }
 
-        public void AddDepart()
-        {
-            if (_departRepository.GetAll().Any()) return;
-            _logger.LogWarning("Adding departement");
-
-            var departement = new List<Departement>
-            {
-                new Departement { Name = "Var", Numero = 83 },
-                new Departement { Name = "Vaucluse", Numero = 84 },
-                new Departement { Name = "Alpes-maritimes", Numero = 06},
-                new Departement { Name = "Bouches-du-Rhône", Numero = 13 },
-                new Departement { Name = "Languedoc-Roussillon", Numero = 34 }
-            };
-            _departRepository.UpdateRange(departement);
-            _departRepository.Save();
-
-            _logger.LogWarning("Added departement");
-        }
-
         public void AddPersons()
         {
             if (_personRepository.GetAll().Any()) return;
@@ -114,6 +98,46 @@ namespace Isen.DotNet.Library.Data
             _personRepository.Save();
 
             _logger.LogWarning("Added persons");
+        }
+
+         public void AddDepart()
+        {
+            if (_departRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding departement");
+
+            var departement = new List<Departement>
+            {
+                new Departement { Name = "Var", Numero = 83 },
+                new Departement { Name = "Vaucluse", Numero = 84 },
+                new Departement { Name = "Alpes-maritimes", Numero = 06},
+                new Departement { Name = "Bouches-du-Rhône", Numero = 13 },
+                new Departement { Name = "Languedoc-Roussillon", Numero = 34 }
+            };
+            _departRepository.UpdateRange(departement);
+            _departRepository.Save();
+
+            _logger.LogWarning("Added departement");
+        }
+
+        public void AddCommunes()
+        {
+            if (_communeRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding communes");
+
+            var communes = new List<Commune>
+            {
+                new Commune
+                {
+                    Name = "Toulon",
+                    Longitude = 123,
+                    Latitude = 345,
+                    Departement = _departRepository.Single("Var")
+                }
+            };
+            _communeRepository.UpdateRange(communes);
+            _communeRepository.Save();
+
+            _logger.LogWarning("Added communes");
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Isen.DotNet.Library.Data
         // 1 - Préciser les DbSet
         public DbSet<City> CityCollection { get;set; }
         public DbSet<Person> PersonCollection { get;set; }
-
         public DbSet<Departement> DepartCollection { get;set; }
+        public DbSet<Departement> CommuneCollection { get;set; }
 
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options) 
@@ -32,12 +32,12 @@ namespace Isen.DotNet.Library.Data
                 .HasOne(p => p.City)
                 .WithMany(c => c.PersonCollection)
                 .HasForeignKey(p => p.CityId);
-                
-            /*builder.Entity<Departement>()
-                .ToTable("Departement")
-                .HasOne(d => d.Name)
-                .WithOne(d => d.Name)
-                .OnDelete(DeleteBehavior.SetNull);*/
+
+             builder.Entity<Commune>()
+                .ToTable("Commune")
+                .HasOne(co => co.Departement)
+                .WithMany(d => d.DepartCollection)
+                .HasForeignKey(co => co.CommuneId);
         }
     }
 }

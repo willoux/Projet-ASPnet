@@ -1,0 +1,53 @@
+@using Isen.DotNet.Library.Models.Implementation;
+@using Isen.DotNet.Library.Repositories.Interfaces;
+@{
+    ViewData["Title"] = "Commune (détail)";
+}
+@inject IDepartRepository _departRepository;
+@model Commune
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Home <small>/commune/detail</small></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal" asp-action="Detail">
+            <input type="hidden" value="@Model?.Id" asp-for="Id" />
+            <div>
+                <label for="Name" class="control-label">Nom de la commune :</label>
+                <input type="text" class="form-control"
+                    id="Name" placeholder="Nom de la commune"
+                    value="@Model?.Name" asp-for="Name" />
+            </div>
+            <div>
+                <label for="Name" class="control-label">Longitude :</label>
+                <input type="text" class="form-control"
+                    id="Longitude" placeholder="Longitude"
+                    value="@Model?.Longitude" asp-for="Longitude" />
+            </div>
+            <div>
+                <label for="Name" class="control-label">Latitude :</label>
+                <input type="text" class="form-control"
+                    id="Latitude" placeholder="Latitude"
+                    value="@Model?.Latitude" asp-for="Latitude" />
+            </div>
+            <div>
+                <label for="DepartId">
+                     Departement : 
+                </label>
+                @Html.DropDownListFor(
+                    d => d.DepartId, new SelectList( _departRepository.GetAll(), "Id", "Name"),
+                    "<Sélectionnez un département>", new { @class = "form-control" }
+                    )
+            </div>
+
+            <br />
+            <input type="submit" class="btn btn-primary" value="Valider" />
+            <a class="btn btn-default" 
+                asp-controller="Commune" asp-action="Index">Annuler</a>
+        </form>
+    </div>
+</div>
