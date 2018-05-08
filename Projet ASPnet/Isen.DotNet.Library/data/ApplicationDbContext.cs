@@ -37,7 +37,7 @@ namespace Isen.DotNet.Library.Data
                 .ToTable("Commune")
                 .HasOne(co => co.Departement)
                 .WithMany(d => d.CommuneCollection)
-                .HasForeignKey(co => co.Id);
+                .HasForeignKey(co => co.DepartementId);
         }
     }
 }

@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Commune (détail)";
 }
-@inject IDepartRepository _departRepository;
+@inject IDepartementRepository _departRepository;
 @model Commune
 
 
@@ -39,7 +39,7 @@
                      Departement : 
                 </label>
                 @Html.DropDownListFor(
-                    d => d.DepartId, new SelectList( _departRepository.GetAll(), "Id", "Name"),
+                    d => d.DepartementId, new SelectList( _departRepository.GetAll(), "Id", "Name"),
                     "<Sélectionnez un département>", new { @class = "form-control" }
                     )
             </div>
