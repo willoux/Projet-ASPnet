@@ -15,6 +15,7 @@ namespace Isen.DotNet.Library.Data
         private readonly IPersonRepository _personRepository;
         private readonly IDepartementRepository _departRepository;
         private readonly ICommuneRepository _communeRepository;
+        private readonly IAddressRepository _addressRepository;
 
         public SeedData(
             ApplicationDbContext context,
@@ -22,7 +23,8 @@ namespace Isen.DotNet.Library.Data
             ICityRepository cityRepository,
             IPersonRepository personRepository,
             IDepartementRepository departementRepository,
-            ICommuneRepository communeRepository)
+            ICommuneRepository communeRepository,
+            IAddressRepository addressRepository)
         {
             _context = context;
             _logger = logger;
@@ -30,6 +32,7 @@ namespace Isen.DotNet.Library.Data
             _personRepository = personRepository;
             _departRepository = departementRepository;
             _communeRepository = communeRepository;
+            _addressRepository = addressRepository;
         }
 
         public void DropDatabase()
@@ -138,6 +141,29 @@ namespace Isen.DotNet.Library.Data
             _communeRepository.Save();
 
             _logger.LogWarning("Added communes");
+        }
+
+        public void AddAddress()
+        {
+            if (_addressRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding addresses");
+
+            var addresses = new List<Address>
+            {
+                new Address
+                {
+                    Name = "Adresse A",
+                    Text = "12 Impasse Gasquet",
+                    Zipcode = 83200,
+                    Commune = _communeRepository.Single("Toulon"),
+                    Longitude = 123,
+                    Latitude = 345
+                }
+            };
+            _addressRepository.UpdateRange(addresses);
+            _addressRepository.Save();
+
+            _logger.LogWarning("Added addresses");
         }
     }
 }

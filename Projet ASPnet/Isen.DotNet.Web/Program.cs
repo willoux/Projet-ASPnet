@@ -30,6 +30,7 @@ namespace Isen.DotNet.Web
                 seed.AddPersons();
                 seed.AddDepart();
                 seed.AddCommunes();
+                seed.AddAddress();
             }
             
             host.Run();

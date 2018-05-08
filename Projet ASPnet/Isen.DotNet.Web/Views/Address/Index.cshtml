@@ -1,0 +1,59 @@
+@using Isen.DotNet.Library.Models.Implementation;
+@{
+    ViewData["Title"] = "Address";
+}
+@model IEnumerable<Address>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Address <small>/address/index</small></h1>
+    </div>
+</div>
+<div class="row">
+    <a class="btn btn-default" 
+        asp-controller="Address" asp-action="Detail">Ajouter une adresse...</a>
+</div>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Detail</th>
+                <th>Code Postal</th>
+                <th>Commune</th>
+                <th>Departement</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var address in Model)
+            {
+            <tr>
+                <td>@address.Id</td>
+                <td>@address.Name</td>
+                <td>@address.Text</td>
+                <td>@address.Zipcode</td>
+                <td>@address.Commune?.Name</td>
+                <!--C'est la qu'il y a le probleme avec l'affichage du département (la pour l'instant y a que l'ID du departement mais pas son nom)-->
+                <td>@address.Commune.DepartementId</td>
+                <td>@address.Longitude</td>
+                <td>@address.Latitude</td>
+                <td>
+                    <a class="btn btn-default" 
+                        asp-controller="Address" 
+                        asp-action="Detail" 
+                        asp-route-id="@address.Id">Editer</a>
+                    &nbsp;
+                    <a class="btn btn-danger" 
+                        asp-controller="Address" 
+                        asp-action="Delete" 
+                        asp-route-id="@address.Id">Supprimer</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
