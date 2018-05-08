@@ -9,8 +9,11 @@ namespace Isen.DotNet.Library.Data
         public DbSet<City> CityCollection { get;set; }
         public DbSet<Person> PersonCollection { get;set; }
         public DbSet<Departement> DepartCollection { get;set; }
-        public DbSet<Departement> CommuneCollection { get;set; }
+        public DbSet<Commune> CommuneCollection { get;set; }
         public DbSet<Address> AddressCollection { get;set; }
+        public DbSet<CatPoi> CatPoiCollection { get;set; }
+
+
 
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options) 
@@ -40,11 +43,11 @@ namespace Isen.DotNet.Library.Data
                 .WithMany(d => d.CommuneCollection)
                 .HasForeignKey(co => co.DepartementId);
 
-            //  builder.Entity<Address>()
-            //     .ToTable("Address")
-            //     .HasOne(ad => ad.Commune)
-            //     .WithMany(co => co.AddressCollection)
-            //     .HasForeignKey(ad => ad.CommuneId);
+             builder.Entity<Address>()
+                .ToTable("Address")
+                .HasOne(ad => ad.Commune)
+                .WithMany(co => co.AddressCollection)
+                .HasForeignKey(ad => ad.CommuneId);
         }
     }
 }

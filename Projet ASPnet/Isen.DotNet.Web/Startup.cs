@@ -51,6 +51,7 @@ namespace Isen.DotNet.Web
             services.AddScoped<IDepartementRepository, DbContextDepartementRepository>();
             services.AddScoped<ICommuneRepository, DbContextCommuneRepository>();
             services.AddScoped<IAddressRepository, DbContextAddressRepository>();
+            services.AddScoped<ICatPoiRepository, DbContextCatPoiRepository>();
             // injection d'autres services
             services.AddScoped<SeedData>();
 

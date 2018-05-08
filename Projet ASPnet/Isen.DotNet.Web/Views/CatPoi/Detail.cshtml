@@ -1,0 +1,34 @@
+@using Isen.DotNet.Library.Models.Implementation;
+@{
+    ViewData["Title"] = "CatPoi (détail)";
+}
+@model CatPoi
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Home <small>/catégorie/detail</small></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal" asp-action="Detail">
+            <input type="hidden" value="@Model?.Id" asp-for="Id" />
+            <div>
+                <label for="Name" class="control-label">Catégorie :</label>
+                <input type="text" class="form-control"
+                    id="Name" placeholder="Categorie"
+                    value="@Model?.Name" asp-for="Name" />
+            </div>
+            <div>
+                <label for="Description" class="control-label">Description :</label>
+                <input type="text" class="form-control"
+                    id="Description" placeholder="Description"
+                    value="@Model?.Description" asp-for="Description" />
+            </div>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Valider" />
+            <a class="btn btn-default" 
+                asp-controller="CatPoi" asp-action="Index">Annuler</a>
+        </form>
+    </div>
+</div>

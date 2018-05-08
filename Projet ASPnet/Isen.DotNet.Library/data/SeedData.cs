@@ -16,6 +16,7 @@ namespace Isen.DotNet.Library.Data
         private readonly IDepartementRepository _departRepository;
         private readonly ICommuneRepository _communeRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ICatPoiRepository _catpoiRepository;
 
         public SeedData(
             ApplicationDbContext context,
@@ -24,7 +25,8 @@ namespace Isen.DotNet.Library.Data
             IPersonRepository personRepository,
             IDepartementRepository departementRepository,
             ICommuneRepository communeRepository,
-            IAddressRepository addressRepository)
+            IAddressRepository addressRepository,
+            ICatPoiRepository catpoiRepository)
         {
             _context = context;
             _logger = logger;
@@ -33,6 +35,7 @@ namespace Isen.DotNet.Library.Data
             _departRepository = departementRepository;
             _communeRepository = communeRepository;
             _addressRepository = addressRepository;
+            _catpoiRepository = catpoiRepository;
         }
 
         public void DropDatabase()
@@ -103,7 +106,7 @@ namespace Isen.DotNet.Library.Data
             _logger.LogWarning("Added persons");
         }
 
-         public void AddDepart()
+        public void AddDepart()
         {
             if (_departRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding departement");
@@ -164,6 +167,23 @@ namespace Isen.DotNet.Library.Data
             _addressRepository.Save();
 
             _logger.LogWarning("Added addresses");
+        }
+        public void AddCatPoi()
+        {
+            if (_catpoiRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding CatPoi");
+
+            var catpoi = new List<CatPoi>
+            {
+                new CatPoi { Name = "Art Comtemporain", Description = "Faire de l'art comtemporain" },
+                new CatPoi { Name = "Musique",  Description = "Faire de la musique"},
+                new CatPoi { Name = "Sport",  Description = "Faire du sport"},
+                
+            };
+            _catpoiRepository.UpdateRange(catpoi);
+            _catpoiRepository.Save();
+
+            _logger.LogWarning("Added CatPoi");
         }
     }
 }
