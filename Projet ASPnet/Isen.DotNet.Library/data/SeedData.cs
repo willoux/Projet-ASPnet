@@ -13,17 +13,20 @@ namespace Isen.DotNet.Library.Data
         private readonly ILogger<SeedData> _logger;
         private readonly ICityRepository _cityRepository;
         private readonly IPersonRepository _personRepository;
+        private readonly IDepartementRepository _departRepository;
 
         public SeedData(
             ApplicationDbContext context,
             ILogger<SeedData> logger,
             ICityRepository cityRepository,
-            IPersonRepository personRepository)
+            IPersonRepository personRepository,
+            IDepartementRepository departementRepository)
         {
             _context = context;
             _logger = logger;
             _cityRepository = cityRepository;
             _personRepository = personRepository;
+            _departRepository = departementRepository;
         }
 
         public void DropDatabase()
@@ -57,6 +60,25 @@ namespace Isen.DotNet.Library.Data
             _cityRepository.Save();
 
             _logger.LogWarning("Added cities");
+        }
+
+        public void AddDepart()
+        {
+            if (_departRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding departement");
+
+            var departement = new List<Departement>
+            {
+                new Departement { Name = "Var", Numero = 83 },
+                new Departement { Name = "Vaucluse", Numero = 84 },
+                new Departement { Name = "Alpes-maritimes", Numero = 06},
+                new Departement { Name = "Bouches-du-Rhône", Numero = 13 },
+                new Departement { Name = "Languedoc-Roussillon", Numero = 34 }
+            };
+            _departRepository.UpdateRange(departement);
+            _departRepository.Save();
+
+            _logger.LogWarning("Added departement");
         }
 
         public void AddPersons()

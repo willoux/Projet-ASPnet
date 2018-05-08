@@ -28,6 +28,7 @@ namespace Isen.DotNet.Web
                 seed.CreateDatabase();
                 seed.AddCities();
                 seed.AddPersons();
+                seed.AddDepart();
             }
             
             host.Run();

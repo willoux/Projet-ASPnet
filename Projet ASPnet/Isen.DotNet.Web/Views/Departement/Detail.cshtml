@@ -19,6 +19,12 @@
                     id="Name" placeholder="Nom du departement"
                     value="@Model?.Name" asp-for="Name" />
             </div>
+            <div>
+                <label for="Name" class="control-label">Numéro de departement :</label>
+                <input type="text" class="form-control"
+                    id="Numero" placeholder="Numero de departement"
+                    value="@Model?.Numero" asp-for="Numero" />
+            </div>
             <br />
             <input type="submit" class="btn btn-primary" value="Valider" />
             <a class="btn btn-default" 
