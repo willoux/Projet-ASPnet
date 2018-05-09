@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Isen.DotNet.Library.Models.Implementation;
 using Isen.DotNet.Library.Repositories.Interfaces;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+
 
 namespace Isen.DotNet.Library.Data
 {
@@ -59,7 +62,7 @@ namespace Isen.DotNet.Library.Data
         {
             if (_cityRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding cities");
-
+           
             var cities = new List<City>
             {
                 new City { Name = "Toulon" },
@@ -71,7 +74,7 @@ namespace Isen.DotNet.Library.Data
             _cityRepository.UpdateRange(cities);
             _cityRepository.Save();
 
-            _logger.LogWarning("Added cities");
+            _logger.LogWarning("Added cities");  
         }
 
         public void AddPersons()
@@ -111,21 +114,24 @@ namespace Isen.DotNet.Library.Data
 
 
 
-
+// ----------------------------------------------------------------------------------------------------------
 
         public void AddDepart()
         {
             if (_departRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding departement");
 
-            var departement = new List<Departement>
+            
+            var m_departement = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Depart.json"));
+            var departement = new List<Departement> { };
+            
+            foreach(var m_depart in m_departement.Departement)
             {
-                new Departement { Name = "Var", Numero = 83 },
-                new Departement { Name = "Vaucluse", Numero = 84 },
-                new Departement { Name = "Alpes-maritimes", Numero = 06},
-                new Departement { Name = "Bouches-du-Rhône", Numero = 13 },
-                new Departement { Name = "Languedoc-Roussillon", Numero = 34 }
-            };
+                departement.Add(new Departement {
+                    Name = m_depart.Nom.ToString(), 
+                    Numero = m_depart.Numero 
+                });
+            }
             _departRepository.UpdateRange(departement);
             _departRepository.Save();
 
@@ -137,7 +143,20 @@ namespace Isen.DotNet.Library.Data
             if (_communeRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding communes");
 
-            var communes = new List<Commune>
+            var m_commune = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Commune.json"));
+            var communes = new List<Commune> { };
+            
+            foreach(var m_com in m_commune.Communes)
+            { 
+                communes.Add( new Commune {
+                    Name = m_com.Nom.ToString(),
+                  // C'est la ligne d'en dessous qui marche pas, bon courage
+                   // Departement = _departRepository.Single(m_com.Departement.ToString())
+                });
+            }
+            
+            
+        /*    var communes = new List<Commune>
             {
                 new Commune
                 {
@@ -147,6 +166,7 @@ namespace Isen.DotNet.Library.Data
                     Departement = _departRepository.Single("Var")
                 }
             };
+        */
             _communeRepository.UpdateRange(communes);
             _communeRepository.Save();
 
@@ -165,7 +185,7 @@ namespace Isen.DotNet.Library.Data
                     Name = "Zenith",
                     Text = "Boulevard Commandant Nicolas",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("Toulon"),
+                    Commune = _communeRepository.Single("ALLOS"),
                     Longitude = 43.128574,
                     Latitude = 5.932092
                 },
@@ -174,7 +194,7 @@ namespace Isen.DotNet.Library.Data
                     Name = "Opera Toulon",
                     Text = "Boulevard de Strasbourg",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("Toulon"),
+                    Commune = _communeRepository.Single("ALLOS"),
                     Longitude = 43.124430,
                     Latitude = 5.932652
                 }

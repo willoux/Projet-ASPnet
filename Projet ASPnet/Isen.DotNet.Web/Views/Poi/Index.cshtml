@@ -33,7 +33,7 @@
                 <td>@poi.Name</td>
                 <td>@poi.Description</td>
                 <td>@poi.Category?.Name</td>
-                <td>@poi.Address?.Commune?.Departement?.Name &#40;@poi.Address?.Commune?.Departement?.Numero&#41;</td>
+                <td>@poi.Address?.Name  :  @poi.Address?.Text,  @poi.Address?.Zipcode,  @poi.Address?.Commune?.Name,  @poi.Address?.Commune?.Departement?.Name</td>
                 <td>
                     <a class="btn btn-default" 
                         asp-controller="Poi" 
