@@ -151,7 +151,7 @@ namespace Isen.DotNet.Library.Data
                 communes.Add( new Commune {
                     Name = m_com.Nom.ToString(),
                   // C'est la ligne d'en dessous qui marche pas, bon courage
-                   // Departement = _departRepository.Single(m_com.Departement.ToString())
+                  // Departement = _departRepository.Single(m_com.Departement.ToString())
                 });
             }
             
