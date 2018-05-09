@@ -4,7 +4,7 @@
     ViewData["Title"] = "Poi (détail)";
 }
 @inject IAddressRepository _addressRepository;
-@inject ICategoryRepository _catpoiRepository;
+@inject ICatPoiRepository _catpoiRepository;
 @model Poi
 
 
@@ -43,7 +43,7 @@
                      Catégorie : 
                 </label>
                 @Html.DropDownListFor(
-                    po => po.CategoryId, new SelectList( _categoryRepository.GetAll(), "Id", "Name"),
+                    po => po.CategoryId, new SelectList( _catpoiRepository.GetAll(), "Id", "Name"),
                     "<Sélectionnez une Catégorie>", new { @class = "form-control" }
                     )
             </div>
