@@ -32,6 +32,7 @@ namespace Isen.DotNet.Web
                 seed.AddCommunes();
                 seed.AddAddress();
                 seed.AddCatPoi();
+                seed.AddPoi();
             }
             
             host.Run();

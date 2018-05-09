@@ -8,8 +8,8 @@ namespace Isen.DotNet.Library.Models.Implementation
     {
         public List<Commune> CommuneCollection { get;set; }
         public int Numero { get;set; }
-        public float Longitude { get;set; }
-        public float Latitude { get;set; }
+        public Double Longitude { get;set; }
+        public Double Latitude { get;set; }
     
         public override dynamic ToDynamic()
         {

@@ -12,6 +12,7 @@ namespace Isen.DotNet.Library.Data
         public DbSet<Commune> CommuneCollection { get;set; }
         public DbSet<Address> AddressCollection { get;set; }
         public DbSet<CatPoi> CatPoiCollection { get;set; }
+        public DbSet<Poi> PoiCollection { get;set; }
 
 
 
@@ -48,6 +49,18 @@ namespace Isen.DotNet.Library.Data
                 .HasOne(ad => ad.Commune)
                 .WithMany(co => co.AddressCollection)
                 .HasForeignKey(ad => ad.CommuneId);
+
+            builder.Entity<Poi>()
+                .ToTable("Poi")
+                .HasOne(po => po.Address)
+                .WithMany(ad => ad.PoiCollection)
+                .HasForeignKey(po => po.AddressId);
+
+            builder.Entity<Poi>()
+                .ToTable("Poi")
+                .HasOne(po => po.Category)
+                .WithMany(cat => cat.PoiCollection)
+                .HasForeignKey(po => po.CategoryId);
         }
     }
 }

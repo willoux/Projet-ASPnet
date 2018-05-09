@@ -1,0 +1,57 @@
+@using Isen.DotNet.Library.Models.Implementation;
+@using Isen.DotNet.Library.Repositories.Interfaces;
+@{
+    ViewData["Title"] = "Poi (détail)";
+}
+@inject IAddressRepository _addressRepository;
+@inject ICategoryRepository _catpoiRepository;
+@model Poi
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Home <small>/Poi/detail</small></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal" asp-action="Detail">
+            <input type="hidden" value="@Model?.Id" asp-for="Id" />
+            <div>
+                <label for="Name" class="control-label">Point d'interet :</label>
+                <input type="text" class="form-control"
+                    id="Name" placeholder="Name"
+                    value="@Model?.Name" asp-for="Name" />
+            </div>
+            <div>
+                <label for="Description" class="control-label">Description :</label>
+                <input type="text" class="form-control"
+                    id="Description" placeholder="Description"
+                    value="@Model?.Description" asp-for="Description" />
+            </div>
+            <div>
+                <label for="AddressId">
+                     Addresse : 
+                </label>
+                @Html.DropDownListFor(
+                    po => po.AddressId, new SelectList( _addressRepository.GetAll(), "Id", "Name"),
+                    "<Sélectionnez une Adresse>", new { @class = "form-control" }
+                    )
+            </div>
+            <div>
+                <label for="CategoryId">
+                     Catégorie : 
+                </label>
+                @Html.DropDownListFor(
+                    po => po.CategoryId, new SelectList( _categoryRepository.GetAll(), "Id", "Name"),
+                    "<Sélectionnez une Catégorie>", new { @class = "form-control" }
+                    )
+            </div>
+
+            <br />
+            <input type="submit" class="btn btn-primary" value="Valider" />
+            <a class="btn btn-default" 
+                asp-controller="Poi" asp-action="Index">Annuler</a>
+        </form>
+    </div>
+</div>

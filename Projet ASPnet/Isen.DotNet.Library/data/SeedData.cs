@@ -17,6 +17,7 @@ namespace Isen.DotNet.Library.Data
         private readonly ICommuneRepository _communeRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly ICatPoiRepository _catpoiRepository;
+        private readonly IPoiRepository _poiRepository;
 
         public SeedData(
             ApplicationDbContext context,
@@ -26,7 +27,8 @@ namespace Isen.DotNet.Library.Data
             IDepartementRepository departementRepository,
             ICommuneRepository communeRepository,
             IAddressRepository addressRepository,
-            ICatPoiRepository catpoiRepository)
+            ICatPoiRepository catpoiRepository,
+            IPoiRepository poiRepository)
         {
             _context = context;
             _logger = logger;
@@ -36,6 +38,7 @@ namespace Isen.DotNet.Library.Data
             _communeRepository = communeRepository;
             _addressRepository = addressRepository;
             _catpoiRepository = catpoiRepository;
+            _poiRepository = poiRepository;
         }
 
         public void DropDatabase()
@@ -106,6 +109,10 @@ namespace Isen.DotNet.Library.Data
             _logger.LogWarning("Added persons");
         }
 
+
+
+
+
         public void AddDepart()
         {
             if (_departRepository.GetAll().Any()) return;
@@ -155,12 +162,21 @@ namespace Isen.DotNet.Library.Data
             {
                 new Address
                 {
-                    Name = "Adresse A",
-                    Text = "12 Impasse Gasquet",
-                    Zipcode = 83200,
+                    Name = "Zenith",
+                    Text = "Boulevard Commandant Nicolas",
+                    Zipcode = 83000,
                     Commune = _communeRepository.Single("Toulon"),
-                    Longitude = 123,
-                    Latitude = 345
+                    Longitude = 43.128574,
+                    Latitude = 5.932092
+                },
+                new Address
+                {
+                    Name = "Opera Toulon",
+                    Text = "Boulevard de Strasbourg",
+                    Zipcode = 83000,
+                    Commune = _communeRepository.Single("Toulon"),
+                    Longitude = 43.124430,
+                    Latitude = 5.932652
                 }
             };
             _addressRepository.UpdateRange(addresses);
@@ -184,6 +200,34 @@ namespace Isen.DotNet.Library.Data
             _catpoiRepository.Save();
 
             _logger.LogWarning("Added CatPoi");
+        }
+
+        public void AddPoi()
+        {
+            if (_poiRepository.GetAll().Any()) return;
+            _logger.LogWarning("Adding poi");
+
+            var poi = new List<Poi>
+            {
+                new Poi
+                {
+                    Name = "Concert Ariana Grande",
+                    Description = "Chanteuse préférée de Wilfried",
+                    Address = _addressRepository.Single("Zenith"),
+                    Category = _catpoiRepository.Single("Musique")
+                },
+                new Poi
+                {
+                    Name = "Lac des Cignes",
+                    Description = "Ballet de Moscou",
+                    Address = _addressRepository.Single("Opera Toulon"),
+                    Category = _catpoiRepository.Single("Art Comtemporain")
+                }
+            };
+            _poiRepository.UpdateRange(poi);
+            _poiRepository.Save();
+
+            _logger.LogWarning("Added poi");
         }
     }
 }
