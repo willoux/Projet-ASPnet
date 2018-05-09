@@ -22,6 +22,6 @@ namespace Isen.DotNet.Library.Repositories.DbContext
 
          public override IQueryable<Address> Includes(
             IQueryable<Address> queryable)
-                => queryable.Include(ad => ad.Commune);
+                => queryable.Include(ad => ad.Commune).ThenInclude(c => c.Departement);
     }
 }

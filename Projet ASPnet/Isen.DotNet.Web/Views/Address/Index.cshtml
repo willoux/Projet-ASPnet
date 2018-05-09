@@ -38,7 +38,7 @@
                 <td>@address.Zipcode</td>
                 <td>@address.Commune?.Name</td>
                 <!--C'est la qu'il y a le probleme avec l'affichage du département (la pour l'instant y a que l'ID du departement mais pas son nom)-->
-                <td>@address.Commune.DepartementId</td>
+                <td>@address.Commune?.Departement?.Name &#40;@address.Commune?.Departement?.Numero&#41;</td>
                 <td>@address.Longitude</td>
                 <td>@address.Latitude</td>
                 <td>

@@ -24,16 +24,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var cat in Model)
+            @foreach(var catpoi in Model)
             {
             <tr>
-                <td>@cat.Id</td>
-                <td>@cat.Name</td>
-                <td>@cat.Description</td>
+                <td>@catpoi.Id</td>
+                <td>@catpoi.Name</td>
+                <td>@catpoi.Description</td>
                 <td>
-                    <a class="btn btn-default" asp-controller="CatPoi" asp-action="Detail" asp-route-id="@catpoi.Id">Editer</a>
+                    <a class="btn btn-default" 
+                        asp-controller="CatPoi" 
+                        asp-action="Detail" 
+                        asp-route-id="@catpoi.Id">Editer</a>
                     &nbsp;
-                    <a class="btn btn-danger" asp-controller="CatPoi" asp-action="Delete" asp-route-id="@catpoi.Id">Supprimer</a>
+                    <a class="btn btn-danger" 
+                        asp-controller="CatPoi" 
+                        asp-action="Delete" 
+                        asp-route-id="@catpoi.Id">Supprimer</a>
                 </td>
             </tr>
             }
