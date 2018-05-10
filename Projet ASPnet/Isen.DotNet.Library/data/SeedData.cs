@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using Isen.DotNet.Library.Models.Implementation;
@@ -148,12 +149,14 @@ namespace Isen.DotNet.Library.Data
             String dept;
             
             foreach(var m_com in m_commune.Communes)
-            { 
-                dept = m_com.Departement.ToString();
-                communes.Add( new Commune {
-                    Name = m_com.Nom.ToString(),
-                    Departement = _departRepository.Single(dept)
-                });
+            {
+                dept = m_com.nom_département.ToString();
+                    communes.Add( new Commune {
+                        Name = m_com.nom_commune.ToString(),
+                        Departement = _departRepository.Single(dept),
+                        Latitude = m_com.latitude.ToString(),
+                        Longitude = m_com.longitude.ToString()
+                     });
             }
             _communeRepository.UpdateRange(communes);
             _communeRepository.Save();
@@ -170,57 +173,57 @@ namespace Isen.DotNet.Library.Data
             {
                 new Address
                 {
-                    Name = "Zenith",
+                    Name = "Zenith Omega",
                     Text = "Boulevard Commandant Nicolas",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 5.932092,
-                    Latitude = 43.128574
+                    Commune = _communeRepository.Single("Toulon"),
+                    Longitude = "5.932092",
+                    Latitude = "43.128574"
                 },
                 new Address
                 {
-                    Name = "Opera Toulon",
+                    Name = "Opera",
                     Text = "Boulevard de Strasbourg",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 5.932652,
-                    Latitude = 43.124430
+                    Commune = _communeRepository.Single("Toulon"),
+                    Longitude = "5.932652",
+                    Latitude = "43.124430"
                 },
                 new Address
                 {
-                    Name = "Mucem Marseille",
+                    Name = "Mucem",
                     Text = "7 Prom. Robert Laffont",
                     Zipcode = 13002,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 5.3609848999999485,
-                    Latitude = 43.2967885
+                    Commune = _communeRepository.Single("Marseille"),
+                    Longitude = "5.3609848999999485",
+                    Latitude = "43.2967885"
                 },
                 new Address
                 {
                     Name = "Parc Borély",
                     Text = "Allée Borely",
                     Zipcode = 13008,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 5.473697000000016,
-                    Latitude = 43.4545252
+                    Commune = _communeRepository.Single("Gardanne"),
+                    Longitude = "5.473697000000016",
+                    Latitude = "43.4545252"
                 },
                 new Address
                 {
-                    Name = "Musée de la Marine Toulon",
+                    Name = "Musée de la Marine",
                     Text = "Place Monsenergue, Quai de Norfolk",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 5.928404999999998,
-                    Latitude = 43.121862
+                    Commune = _communeRepository.Single("Toulon"),
+                    Longitude = "5.928404999999998",
+                    Latitude = "43.121862"
                 },
                 new Address
                 {
                     Name = "Théatre Antique",
                     Text = "Rue Madeleine Roche",
                     Zipcode = 84100,
-                    Commune = _communeRepository.Single("SIGOYER"),
-                    Longitude = 4.80803149999997,
-                    Latitude = 44.1360363
+                    Commune = _communeRepository.Single("Orange"),
+                    Longitude = "4.80803149999997",
+                    Latitude = "44.1360363"
                 }
             };
             _addressRepository.UpdateRange(addresses);

@@ -9,8 +9,8 @@ namespace Isen.DotNet.Library.Models.Implementation
         public string Text { get;set; }
         public int Zipcode { get;set; }
         public Commune Commune { get;set; }
-        public Double Longitude { get;set; }
-        public Double Latitude { get;set; }
+        public String Longitude { get;set; }
+        public String Latitude { get;set; }
         public int? CommuneId { get;set; }
         public List<Poi> PoiCollection { get;set; }
 

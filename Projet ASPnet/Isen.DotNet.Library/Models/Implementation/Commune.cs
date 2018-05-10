@@ -9,8 +9,8 @@ namespace Isen.DotNet.Library.Models.Implementation
         public Departement Departement { get;set; }
         public List<Address> AddressCollection { get;set; }
         public int? DepartementId { get;set; }
-        public Double Latitude { get;set; }
-        public Double Longitude { get;set; }
+        public String Latitude { get;set; }
+        public String Longitude { get;set; }
 
          public override dynamic ToDynamic()
         {
