@@ -152,24 +152,9 @@ namespace Isen.DotNet.Library.Data
                 dept = m_com.Departement.ToString();
                 communes.Add( new Commune {
                     Name = m_com.Nom.ToString(),
-                  // C'est la ligne d'en dessous qui marche pas, bon courage
-                    //Departement = _departRepository.Single(m_com.Departement.ToString())
                     Departement = _departRepository.Single(dept)
                 });
             }
-            
-            
-        /*    var communes = new List<Commune>
-            {
-                new Commune
-                {
-                    Name = "Toulon",
-                    Longitude = 123,
-                    Latitude = 345,
-                    Departement = _departRepository.Single("Var")
-                }
-            };
-        */
             _communeRepository.UpdateRange(communes);
             _communeRepository.Save();
 
@@ -188,18 +173,54 @@ namespace Isen.DotNet.Library.Data
                     Name = "Zenith",
                     Text = "Boulevard Commandant Nicolas",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("ALLOS"),
-                    Longitude = 43.128574,
-                    Latitude = 5.932092
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 5.932092,
+                    Latitude = 43.128574
                 },
                 new Address
                 {
                     Name = "Opera Toulon",
                     Text = "Boulevard de Strasbourg",
                     Zipcode = 83000,
-                    Commune = _communeRepository.Single("ALLOS"),
-                    Longitude = 43.124430,
-                    Latitude = 5.932652
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 5.932652,
+                    Latitude = 43.124430
+                },
+                new Address
+                {
+                    Name = "Mucem Marseille",
+                    Text = "7 Prom. Robert Laffont",
+                    Zipcode = 13002,
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 5.3609848999999485,
+                    Latitude = 43.2967885
+                },
+                new Address
+                {
+                    Name = "Parc Borély",
+                    Text = "Allée Borely",
+                    Zipcode = 13008,
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 5.473697000000016,
+                    Latitude = 43.4545252
+                },
+                new Address
+                {
+                    Name = "Musée de la Marine Toulon",
+                    Text = "Place Monsenergue, Quai de Norfolk",
+                    Zipcode = 83000,
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 5.928404999999998,
+                    Latitude = 43.121862
+                },
+                new Address
+                {
+                    Name = "Théatre Antique",
+                    Text = "Rue Madeleine Roche",
+                    Zipcode = 84100,
+                    Commune = _communeRepository.Single("SIGOYER"),
+                    Longitude = 4.80803149999997,
+                    Latitude = 44.1360363
                 }
             };
             _addressRepository.UpdateRange(addresses);
@@ -212,14 +233,17 @@ namespace Isen.DotNet.Library.Data
             if (_catpoiRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding CatPoi");
 
-            var catpoi = new List<CatPoi>
-            {
-                new CatPoi { Name = "Art Comtemporain", Description = "Faire de l'art comtemporain" },
-                new CatPoi { Name = "Musique",  Description = "Faire de la musique"},
-                new CatPoi { Name = "Sport",  Description = "Faire du sport"},
-                
-            };
-            _catpoiRepository.UpdateRange(catpoi);
+            var m_catego = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/CatPoi.json"));
+            var categories = new List<CatPoi> { };
+            
+            foreach(var m_cat in m_catego.Categories)
+            { 
+                categories.Add( new CatPoi {
+                    Name = m_cat.Nom.ToString(),
+                    Description = m_cat.Description.ToString()
+                });
+            }
+            _catpoiRepository.UpdateRange(categories);
             _catpoiRepository.Save();
 
             _logger.LogWarning("Added CatPoi");
@@ -230,23 +254,24 @@ namespace Isen.DotNet.Library.Data
             if (_poiRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding poi");
 
-            var poi = new List<Poi>
-            {
-                new Poi
-                {
-                    Name = "Concert Ariana Grande",
-                    Description = "Chanteuse préférée de Wilfried",
-                    Address = _addressRepository.Single("Zenith"),
-                    Category = _catpoiRepository.Single("Musique")
-                },
-                new Poi
-                {
-                    Name = "Lac des Cignes",
-                    Description = "Ballet de Moscou",
-                    Address = _addressRepository.Single("Opera Toulon"),
-                    Category = _catpoiRepository.Single("Art Comtemporain")
-                }
-            };
+            var m_pointinteret = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Poi.json"));
+            var poi = new List<Poi> { };
+            String dept;
+            String dept2;
+            
+            foreach(var m_poi in m_pointinteret.Poi)
+            { 
+                dept = m_poi.Adresse.ToString();
+                dept2 = m_poi.Categorie.ToString();
+                
+                poi.Add( new Poi {
+                    Name = m_poi.Nom.ToString(),
+                    Description = m_poi.Description.ToString(),
+                    Address = _addressRepository.Single(dept),
+                    Category = _catpoiRepository.Single(dept2)
+                });
+            }
+            
             _poiRepository.UpdateRange(poi);
             _poiRepository.Save();
 
