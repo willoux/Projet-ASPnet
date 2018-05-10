@@ -145,13 +145,16 @@ namespace Isen.DotNet.Library.Data
 
             var m_commune = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Commune.json"));
             var communes = new List<Commune> { };
+            String dept;
             
             foreach(var m_com in m_commune.Communes)
             { 
+                dept = m_com.Departement.ToString();
                 communes.Add( new Commune {
                     Name = m_com.Nom.ToString(),
                   // C'est la ligne d'en dessous qui marche pas, bon courage
-                  // Departement = _departRepository.Single(m_com.Departement.ToString())
+                    //Departement = _departRepository.Single(m_com.Departement.ToString())
+                    Departement = _departRepository.Single(dept)
                 });
             }
             
