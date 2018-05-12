@@ -12,7 +12,7 @@ namespace Isen.DotNet.Library.Models.Implementation
         public String Latitude { get;set; }
         public String Longitude { get;set; }
 
-         public override dynamic ToDynamic()
+        public override dynamic ToDynamic()
         {
             var response = base.ToDynamic();
             response.longitude = Longitude;

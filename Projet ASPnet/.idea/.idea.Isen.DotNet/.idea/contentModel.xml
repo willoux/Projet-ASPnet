@@ -92,6 +92,7 @@
           <e p="HomeController.cs" t="Include" />
           <e p="MapController.cs" t="Include" />
           <e p="PersonController.cs" t="Include" />
+          <e p="PoiApiController.cs" t="Include" />
           <e p="PoiController.cs" t="Include" />
         </e>
         <e p="Isen.DotNet.Web.csproj" t="IncludeRecursive" />
@@ -168,7 +169,6 @@
             <e p="banner3.svg" t="Include" />
             <e p="banner4.svg" t="Include" />
           </e>
-          <e p="js" t="Include" />
           <e p="lib" t="Include">
             <e p="bootstrap" t="Include">
               <e p=".bower.json" t="Include" />
