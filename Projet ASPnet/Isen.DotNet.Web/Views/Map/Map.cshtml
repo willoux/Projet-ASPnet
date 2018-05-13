@@ -85,6 +85,9 @@
                 infowindow.open(map, marker);
             });*/
             google.maps.event.addListener(markers[i], 'click', function () {
+                    for(var j = 0; j < infowindows.length; j++){
+                        infowindows[j].close();
+                    }
                     //infowindows.open(map, markers[i]);
                     infowindows[this.index].open(map,markers[this.index]);
                     map.panTo(markers[this.index].getPosition());                
