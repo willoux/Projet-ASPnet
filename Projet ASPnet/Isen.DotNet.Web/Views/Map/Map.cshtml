@@ -1,10 +1,11 @@
 ﻿@using Isen.DotNet.Library.Models.Implementation;
+@using Isen.DotNet.Library.Repositories.Interfaces;
 @{
     ViewData["Title"] = "Map";
-    ViewData["Desc"] = "Affichage des points d'intérêt sur une map";
-    
-   
+    ViewData["Desc"] = "Affichage des points d'intérêt sur une map"; 
 }
+
+
 
 
 <div class="row">
@@ -14,12 +15,27 @@
     </div>
 </div>
 
+
+ 
 <div id="json"></div>
 <div id="map"></div>
 
+
 <script>
+    
+    
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:5000/api/pois/all";
+
+    var test = 1;
+    
+    if (test === 1) {
+        var url = "http://localhost:5000/api/pois/all";
+    }else if (test === 2) {
+        var url = "http://localhost:5000/api/pois/departement/Var";
+    } else {
+        var url = "http://localhost:5000/api/pois/commune/Toulon";
+    }
+    
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -32,50 +48,42 @@
     var out = "";
     function myFunction(arr) {
     
-    var i;
-    /*for(i = 0; i < arr.length; i++) {
-        out += '<a href="' + arr[i].category.poiCollection + '">' +
-        arr[i].categoryId +
-        arr[i].category.name + 
-        arr[i].address.text +
-        arr[i].address.name +
-        arr[i].address.latitude +
-        arr[i].address.longitude +
-        arr[i].address.commune.name +
-        arr[i].address.commune.departement.name +
-        arr[i].description +
-        arr[i].name + '</a><br>';
-    }
-    document.getElementById("json").innerHTML = out;*/
-     var map = new google.maps.Map(document.getElementById('map'), {
+        var i;
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
             center: {
                 lat: 43.467768, 
                 lng: 6.095036
             },
-            zoom: 8
+            zoom: 7
         });
         var markers = [];
         var contentString = [];
         var infowindows = [];
-        //var infowindow = new google.maps.InfoWindow();
+
+        
         for (i = 0; i < arr.length; i++) {
             markers[i] = new google.maps.Marker({
                 map: map,
                 position: { 
                     lat : Number(arr[i].address.latitude), 
                     lng : Number(arr[i].address.longitude) 
-                    }
+                }
             });
             markers[i].index = i;
             contentString[i] = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">' + arr[i].name +'</h1>'+
-            '<div id="bodyContent">'+
-            '<p>' + arr[i].description + '</p>'+
-            '<p>' + arr[i].address.name + '</p>'+
-            '</div>'+
-            '</div>';
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">' + arr[i].name +'</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b> Description : </b>' + arr[i].description + '</p>'+
+                '<p><b> Categorie Poi : </b>' + arr[i].category.name + '</p>'+   
+                '<p><b> Description Catégorie : </b>' + arr[i].category.description + '</p>'+
+                '<p><b> Adresse : </b>' + arr[i].address.name + ', ' + arr[i].address.text + ', ' + arr[i].address.zipcode + ' ' + arr[i].address.commune.name + ', ' + arr[i].address.commune.departement.name +'</p>'+
+                '<p><b> Latitude : </b>' + arr[i].address.latitude + '</p>'+
+                '<p><b> Longitude : </b>' + arr[i].address.longitude + '</p>'+
+                '</div>'+
+                '</div>';
 
             infowindows[i] = new google.maps.InfoWindow({
                 content: contentString[i]
@@ -85,15 +93,14 @@
                 infowindow.open(map, marker);
             });*/
             google.maps.event.addListener(markers[i], 'click', function () {
-                    for(var j = 0; j < infowindows.length; j++){
-                        infowindows[j].close();
-                    }
-                    //infowindows.open(map, markers[i]);
-                    infowindows[this.index].open(map,markers[this.index]);
-                    map.panTo(markers[this.index].getPosition());                
+                for(var j = 0; j < infowindows.length; j++){
+                    infowindows[j].close();
+                }
+                infowindows[this.index].open(map,markers[this.index]);
+                map.panTo(markers[this.index].getPosition());                
             });
         }
-}
+    }
     function initMap() {
        
        

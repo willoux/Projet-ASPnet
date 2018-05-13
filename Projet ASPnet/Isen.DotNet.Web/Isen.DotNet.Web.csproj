@@ -13,4 +13,38 @@
   <ItemGroup>
     <ProjectReference Include="..\Isen.DotNet.Library\Isen.DotNet.Library.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\.gitignore" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\.hsdoc" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\bower.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\CHANGELOG.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\CONTRIBUTING.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\dist\css\select-theme-chosen.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\dist\css\select-theme-dark.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\dist\css\select-theme-default.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\dist\js\select.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\dist\js\select.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\examples\simple\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\intro.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\coffee\welcome.coffee" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\css\prism.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\css\welcome.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\js\jquery.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\js\welcome.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\docs\welcome\sass\welcome.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\gulpfile.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\LICENSE" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\package.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\README.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\select-theme-chosen.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\select-theme-dark.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\select-theme-default.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\_checkmark.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\_checkmark.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\_no-mobile-tap-highlight.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\_select.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\css\_user-select.sass" />
+    <_ContentIncludedByDefault Remove="wwwroot\select-1.1.1\src\js\select.js" />
+  </ItemGroup>
 </Project>
