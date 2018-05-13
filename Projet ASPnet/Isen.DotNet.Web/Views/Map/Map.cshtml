@@ -17,13 +17,135 @@
 
 
  
-<div id="json"></div>
+<div>
+    <select id="departement" name="departement"></select>
+    <select id="commune" name="commune"></select>
+    <select id="category" name="category"></select>
+</div>
+
 <div id="map"></div>
 
 
 <script>
+
+    // PARTIE DROPDOWN MENU
+    function functionDept(){
+        var dropdown = document.getElementById('departement');
+        dropdown.length = 0;
+
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Choisissez un departement';
+
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        var urlDeptApi = 'http://localhost:5000/api/departements/all';
+
+        var request = new XMLHttpRequest();
+        request.open('GET', urlDeptApi, true);
+
+        request.onload = function() {
+        if (request.status === 200) {
+            const data = JSON.parse(request.responseText);
+            let option;
+            for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i].name;
+            dropdown.add(option);
+            }
+        } else {
+            // Reached the server, but it returned an error
+        }   
+        }
+
+        request.onerror = function() {
+        console.error('An error occurred fetching the JSON from ' + urlDeptApi);
+        };
+
+        request.send();
+    }
+    // COMMUNES
+    function functionCommune(){
+        var dropdown = document.getElementById('commune');
+        dropdown.length = 0;
+
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Choisissez une commune';
+
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        var urlCommuneApi = 'http://localhost:5000/api/communes/all';
+
+        var request = new XMLHttpRequest();
+        request.open('GET', urlCommuneApi, true);
+
+        request.onload = function() {
+        if (request.status === 200) {
+            const data = JSON.parse(request.responseText);
+            let option;
+            for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i].name;
+            dropdown.add(option);
+            }
+        } else {
+            // Reached the server, but it returned an error
+        }   
+        }
+
+        request.onerror = function() {
+        console.error('An error occurred fetching the JSON from ' + urlCommuneApi);
+        };
+
+        request.send();
+    }
+    /////////////////////////
     
-    
+    // CATEGORIES
+
+    function functionCat(){
+        var dropdown = document.getElementById('category');
+        dropdown.length = 0;
+
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Choisissez une catégorie';
+
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        var urlCatApi = 'http://localhost:5000/api/categories/all';
+
+        var request = new XMLHttpRequest();
+        request.open('GET', urlCatApi, true);
+
+        request.onload = function() {
+        if (request.status === 200) {
+            const data = JSON.parse(request.responseText);
+            let option;
+            for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i].name;
+            dropdown.add(option);
+            }
+        } else {
+            // Reached the server, but it returned an error
+        }   
+        }
+
+        request.onerror = function() {
+        console.error('An error occurred fetching the JSON from ' + urlCatApi);
+        };
+
+        request.send();
+    }
+
+    // PARTIE MAP
+
+    functionDept();
+    functionCommune();
+    functionCat();
+
     var xmlhttp = new XMLHttpRequest();
 
     var test = 1;
@@ -102,49 +224,6 @@
         }
     }
     function initMap() {
-       
-       
-        // Créé un marqueur avec titre + position (il est en autralie pour l'instant).
-        /*var marker = new google.maps.Marker({
-            map: map,
-            position: {
-                lat: -25.363, 
-                lng: 131.044
-            },
-            title: 'Test marqueur !'
-        });
-        
-        // Contenu de l'info bulle du marqueur
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-        
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });*/
-       
-        
  
     }
 </script>
