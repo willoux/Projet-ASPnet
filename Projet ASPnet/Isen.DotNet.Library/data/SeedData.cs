@@ -123,7 +123,7 @@ namespace Isen.DotNet.Library.Data
             _logger.LogWarning("Adding departement");
 
             
-            var m_departement = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Depart.json"));
+            var m_departement = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/Depart.json"));
             var departement = new List<Departement> { };
             
             foreach(var m_depart in m_departement.Departement)
@@ -144,7 +144,7 @@ namespace Isen.DotNet.Library.Data
             if (_communeRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding communes");
 
-            var m_commune = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Commune.json"));
+            var m_commune = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/Commune.json"));
             var communes = new List<Commune> { };
             String dept;
             
@@ -236,7 +236,7 @@ namespace Isen.DotNet.Library.Data
             if (_catpoiRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding CatPoi");
 
-            var m_catego = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/CatPoi.json"));
+            var m_catego = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/CatPoi.json"));
             var categories = new List<CatPoi> { };
             
             foreach(var m_cat in m_catego.Categories)
@@ -257,7 +257,7 @@ namespace Isen.DotNet.Library.Data
             if (_poiRepository.GetAll().Any()) return;
             _logger.LogWarning("Adding poi");
 
-            var m_pointinteret = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/bin/Poi.json"));
+            var m_pointinteret = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("../Isen.DotNet.Library/Poi.json"));
             var poi = new List<Poi> { };
             String dept;
             String dept2;

@@ -1,0 +1,29 @@
+{
+  "Categories":
+    [
+      {
+        "Nom" : "Concert",
+        "Description" : "Principaux Concert organisé dans la région."
+      },
+      {
+        "Nom" : "Festival",
+        "Description" : "Regrouppements et manifestations musicales."
+      },
+      {
+        "Nom" : "Exposition",
+        "Description" : "Les plus belles expositions de la région PACA."
+      },
+      {
+        "Nom" : "Musée",
+        "Description" : "Pour en savoir plus sur la region, son histoire et sa culture."
+      },
+      {
+        "Nom" : "Parc",
+        "Description" : "Espace vert pour se detendre en milieu urbain."
+      },
+      {
+        "Nom" : "Patrimoine",
+        "Description" : "Lieux touristiques appartenant au patrimoine de la region."
+      }
+    ]
+}

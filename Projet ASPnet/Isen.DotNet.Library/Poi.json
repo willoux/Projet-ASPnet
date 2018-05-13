@@ -1,0 +1,41 @@
+{
+  "Poi":
+    [
+      {
+        "Nom" : "Concert Ariana Grande",
+        "Description" : "Chanteuse Internationalle de Pop.",
+        "Categorie" : "Concert",
+        "Adresse" : "Zenith Omega"
+      },
+      {
+        "Nom" : "Parc Borély",
+        "Description" : "Parc dans le centre de Marseille.",
+        "Categorie" : "Parc",
+        "Adresse" : "Parc Borély"
+      },
+      {
+        "Nom" : "Musée de la Marine",
+        "Description" : "Musée pres de la rade de Toulon, explique l'histoire navale de la ville.",
+        "Categorie" : "Musée",
+        "Adresse" : "Musée de la Marine"
+      },
+      {
+        "Nom" : "Mucem",
+        "Description" : "Musée à Marseille sur la civilisation de l'Europe et de la Méditérannée.",
+        "Categorie" : "Musée",
+        "Adresse" : "Mucem"
+      },
+      {
+        "Nom" : "Théatre Antique",
+        "Description" : "Ancien Théatre de la période Greco-Romaine.",
+        "Categorie" : "Patrimoine",
+        "Adresse" : "Théatre Antique"
+      }
+    ]
+}
+
+
+
+
+
+

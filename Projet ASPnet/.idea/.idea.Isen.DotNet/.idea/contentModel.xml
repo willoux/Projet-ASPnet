@@ -9,10 +9,13 @@
       <e p="Isen.DotNet.ConsoleApp\Isen.DotNet.ConsoleApp.csproj" t="IncludeRecursive" />
       <e p="Isen.DotNet.Library" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CatPoi.json" t="Include" />
+        <e p="Commune.json" t="Include" />
         <e p="data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="SeedData.cs" t="Include" />
         </e>
+        <e p="Depart.json" t="Include" />
         <e p="Hello.cs" t="Include" />
         <e p="Isen.DotNet.Library.csproj" t="IncludeRecursive" />
         <e p="Models" t="Include">
@@ -36,6 +39,7 @@
             </e>
           </e>
         </e>
+        <e p="Poi.json" t="Include" />
         <e p="Repositories" t="Include">
           <e p="Base" t="Include">
             <e p="_BaseRepository.cs" t="Include" />

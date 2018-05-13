@@ -1,0 +1,41 @@
+{
+  "Departement":
+    [
+      {
+        "Nom" : "Alpes-de-Haute-Provence",
+        "Numero" : "04",
+        "Longitude" : "",
+        "Latitude" : ""
+      },
+      {
+        "Nom" : "Hautes-Alpes",
+        "Numero" : "05",
+        "Longitude" : "",
+        "Latitude" : ""
+      },
+      {
+        "Nom" : "Alpes-Maritimes",
+        "Numero" : "06",
+        "Longitude" : "",
+        "Latitude" : ""
+      },
+      {
+        "Nom" : "Bouches-du-Rhône",
+        "Numero" : "13",
+        "Longitude" : "",
+        "Latitude" : ""
+      },
+      {
+        "Nom" : "Var",
+        "Numero" : "83",
+        "Longitude" : "",
+        "Latitude" : ""
+      },
+      {
+        "Nom" : "Vaucluse",
+        "Numero" : "84",
+        "Longitude" : "",
+        "Latitude" : ""
+      }
+    ]
+}
