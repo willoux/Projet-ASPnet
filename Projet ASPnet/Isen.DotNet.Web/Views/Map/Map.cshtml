@@ -18,9 +18,9 @@
 
  
 <div>
-    <select id="departement" name="departement"></select>
-    <select id="commune" name="commune"></select>
-    <select id="category" name="category"></select>
+    <select id="departement" name="departement" onchange="recupereDep()"></select>
+    <select id="commune" name="commune" onchange="recupereCom()"></select>
+    <select id="category" name="category" onchange="recupereCat()"></select>
 </div>
 
 <div id="map"></div>
@@ -51,6 +51,7 @@
             for (let i = 0; i < data.length; i++) {
             option = document.createElement('option');
             option.text = data[i].name;
+            option.value = data[i].name;
             dropdown.add(option);
             }
         } else {
@@ -87,6 +88,7 @@
             for (let i = 0; i < data.length; i++) {
             option = document.createElement('option');
             option.text = data[i].name;
+            option.value = data[i].name;    
             dropdown.add(option);
             }
         } else {
@@ -126,6 +128,7 @@
             for (let i = 0; i < data.length; i++) {
             option = document.createElement('option');
             option.text = data[i].name;
+            option.value = data[i].name;
             dropdown.add(option);
             }
         } else {
@@ -146,28 +149,65 @@
     functionCommune();
     functionCat();
 
-    var xmlhttp = new XMLHttpRequest();
-
-    var test = 1;
+    recupereUrl("http://localhost:5000/api/pois/all");
     
-    if (test === 1) {
-        var url = "http://localhost:5000/api/pois/all";
-    }else if (test === 2) {
-        var url = "http://localhost:5000/api/pois/departement/Var";
-    } else {
-        var url = "http://localhost:5000/api/pois/commune/Toulon";
+    
+    function recupereDep() {
+        var depform = document.getElementById("departement");
+        var mondepartement = depform.options[depform.selectedIndex].value;
+        console.log(mondepartement);
+        if (mondepartement === "Choisissez un departement") {
+            var monUrl = "http://localhost:5000/api/pois/all";
+        } else {
+            var monUrl = "http://localhost:5000/api/pois/departement/"+ mondepartement;
+        }
+        
+        recupereUrl(monUrl);
     }
     
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myArr = JSON.parse(this.responseText);
-            myFunction(myArr);
+    
+    function recupereCom() {
+        var comform = document.getElementById("commune");
+        var macommune = comform.options[comform.selectedIndex].value;
+        console.log(macommune);
+        if (macommune === "Choisissez une commune") {
+            var monUrl = "http://localhost:5000/api/pois/all";
+        } else {
+            var monUrl = "http://localhost:5000/api/pois/commune/" + macommune;
         }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-    var out = "";
+         recupereUrl(monUrl);
+    }
+    
+    function recupereCat() {
+        var catform = document.getElementById("category");
+        var macategory = catform.options[catform.selectedIndex].value;
+        console.log(macategory);
+        if (macategory === "Choisissez une catégorie") {
+            var monUrl = "http://localhost:5000/api/pois/all";
+        } else {
+            var monUrl = "http://localhost:5000/api/pois/categorie/"+ macategory;
+        }
+        recupereUrl(monUrl);
+    }
+
+    
+    function recupereUrl(url) {
+        var xmlhttp = new XMLHttpRequest();
+
+    
+    
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                myFunction(myArr);
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+        var out = "";
+    }
+    
     function myFunction(arr) {
     
         var i;
