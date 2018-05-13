@@ -1,16 +1,8 @@
 ﻿@using Isen.DotNet.Library.Models.Implementation;
-@model IEnumerable<Poi>
 @{
     ViewData["Title"] = "Map";
     ViewData["Desc"] = "Affichage des points d'intérêt sur une map";
     
-    
-    
-    var poiList = new List<string>();
-
-    
-
-    var markerJsonArray = "[" + string.Join(",", poiList.ToArray()) + "]";
    
 }
 
@@ -22,24 +14,88 @@
     </div>
 </div>
 
-
+<div id="json"></div>
 <div id="map"></div>
 
 <script>
-    function initMap() {
-        // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:5000/api/pois/all";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            myFunction(myArr);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    var out = "";
+    function myFunction(arr) {
+    
+    var i;
+    /*for(i = 0; i < arr.length; i++) {
+        out += '<a href="' + arr[i].category.poiCollection + '">' +
+        arr[i].categoryId +
+        arr[i].category.name + 
+        arr[i].address.text +
+        arr[i].address.name +
+        arr[i].address.latitude +
+        arr[i].address.longitude +
+        arr[i].address.commune.name +
+        arr[i].address.commune.departement.name +
+        arr[i].description +
+        arr[i].name + '</a><br>';
+    }
+    document.getElementById("json").innerHTML = out;*/
+     var map = new google.maps.Map(document.getElementById('map'), {
             center: {
                 lat: 43.467768, 
                 lng: 6.095036
             },
             zoom: 8
         });
-        
-        
+        var markers = [];
+        var contentString = [];
+        var infowindows = [];
+        //var infowindow = new google.maps.InfoWindow();
+        for (i = 0; i < arr.length; i++) {
+            markers[i] = new google.maps.Marker({
+                map: map,
+                position: { 
+                    lat : Number(arr[i].address.latitude), 
+                    lng : Number(arr[i].address.longitude) 
+                    }
+            });
+            markers[i].index = i;
+            contentString[i] = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">' + arr[i].name +'</h1>'+
+            '<div id="bodyContent">'+
+            '<p>' + arr[i].description + '</p>'+
+            '<p>' + arr[i].address.name + '</p>'+
+            '</div>'+
+            '</div>';
+
+            infowindows[i] = new google.maps.InfoWindow({
+                content: contentString[i]
+            });
+            //infowindow.open(map, marker);
+            /*marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });*/
+            google.maps.event.addListener(markers[i], 'click', function () {
+                    //infowindows.open(map, markers[i]);
+                    infowindows[this.index].open(map,markers[this.index]);
+                    map.panTo(markers[this.index].getPosition());                
+            });
+        }
+}
+    function initMap() {
+       
        
         // Créé un marqueur avec titre + position (il est en autralie pour l'instant).
-        var marker = new google.maps.Marker({
+        /*var marker = new google.maps.Marker({
             map: map,
             position: {
                 lat: -25.363, 
@@ -76,7 +132,7 @@
 
         marker.addListener('click', function() {
             infowindow.open(map, marker);
-        });
+        });*/
        
         
  
